@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard — TryEasy 50/30/20</title>
+  <link rel="stylesheet" href="/menu principal/style.css" />
+</head>
+<body>
+
+  <!-- Fundo com overlay e blur -->
+  <div class="bg-wrap"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- TOPO DA PÁGINA -->
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">
+          <img src="/assets/logo.png" alt="Logo" />
+        </div>
+        TryEasy
+      </div>
+
+      <nav class="navbar">
+        <a href="/menu principal/index.html">Início</a>
+        <a href="/menu principal/perfil.html">Perfil</a>
+        <a href="https://economia.uol.com.br/noticias/redacao/2024/02/02/metodo-50-30-20-aprenda-a-tecnica-para-passar-de-devedor-a-investidor.htm" target="_blank">Dicas Financeiras</a>
+        <a href="/index.html" onclick="logout()">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTAINER PRINCIPAL -->
+  <main class="container">
+    <h2>Bem-vindo, <span id="nomeUsuario">--</span>!</h2>
+
+    <!-- Cards 50/30/20 + Saldo Anual ( ficará abaixo ) -->
+    <section class="cards" id="cardsRow">
+      <div class="card-item card-50">
+        <h3>50%</h3>
+        <p>Necessidades</p>
+        <span id="valor50">R$ 0,00</span>
+      </div>
+      <div class="card-item card-30">
+        <h3>30%</h3>
+        <p>Desejos</p>
+        <span id="valor30">R$ 0,00</span>
+      </div>
+      <div class="card-item card-20">
+        <h3>20%</h3>
+        <p>Prioridades</p>
+        <span id="valor20">R$ 0,00</span>
+      </div>
+    </section>
+
+    <!-- Receitas Mensais card (fica abaixo dos 3 cards) -->
+    <section class="cards">
+      <div class="card-item card-annual">
+        <h3>Receitas Mensais</h3>
+        <span id="valorAnual">R$ 0,00</span>
+      </div>
+    </section>
+
+    <!-- Input de salário/despesa (em tempo real) -->
+    <section class="input-section">
+      <h2>Informe seu salário e despesa</h2>
+      <div class="input-wrap">
+        <input type="number" id="salario" placeholder="Ex: 1518.00" step="0.01" />
+        <input type="number" id="despesaDiaria" placeholder="Despesa diária (Ex: 50.00)" step="0.01" />
+      </div>
+      <p class="muted">As mudanças são salvas automaticamente.</p>
+    </section>
+
+    <!-- Gráfico 50/30/20 -->
+    <section class="grafico">
+      <h2>Distribuição dos Gastos</h2>
+      <canvas id="graficoPizza"></canvas>
+    </section>
+
+    <!-- Gráfico de Estimativa de Investimento -->
+    <section class="grafico">
+      <h2>Estimativa de Investimento Futuro (12 meses)</h2>
+      <canvas id="graficoInvestimento"></canvas>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>TryEasy — Software Developer © 2025 Todos os direitos reservados</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- script.js externo -->
+  <script src="/menu principal/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+/* ===================== ESTILIZAÇÃO DO LOGIN+CADASTRO ===================== */
+
+/* ===================== GLOBAL ===================== */
+:root {
+  --card-radius: 18px;
+  --accent-green: #00ff66;
+  --bg-color: #0b1b33;
+  --text-color: #fff;
+}
+
+/* ===================== RESET ===================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+/* ===================== BODY ===================== */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+/* Classes específicas para páginas */
+body.login { font-family: 'Inter', Arial, sans-serif; }
+body.cadastro { font-family: 'Roboto', sans-serif; }
+
+/* ===================== FUNDO BORRADO ===================== */
+.bg-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+.bg-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 20px;
+  border-radius: 22px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px) brightness(0.8);
+}
+body.login .bg-wrap::before {
+  background-image: url("monstrance-3483291_1280.jpeg");
+}
+body.cadastro .bg-wrap::before {
+  background-image: url("fundo-cadastro.jpeg");
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 8px 30px #00188D inset;
+}
+
+/* ===================== CARD CENTRAL ===================== */
+.card {
+  position: relative;
+  z-index: 1;
+  padding: 28px;
+  border-radius: var(--card-radius);
+  background: #0022ff26;
+  backdrop-filter: blur(6px);
+  border: 3px solid #0f5bcc99;
+  box-shadow: 0 10px 30px #03081499;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: center;
+}
+
+/* Diferenciação de tamanho por página */
+body.login .card {
+  width: 420px;
+  min-height: 560px;
+}
+body.cadastro .card {
+  width: 820px;
+}
+
+/* ===================== LOGO E MARCA ===================== */
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.brand {
+  display: flex;
+  gap: 8px;
+  font-weight: 700;
+}
+.try { color: #00FFCC; }
+.tech { color: #00c3ff; }
+
+/* ===================== FORMULÁRIO ===================== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+label.small {
+  font-size: 12px;
+  color: var(--text-color);
+}
+.input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid #000000;
+  padding: 10px;
+  border-radius: 8px;
+  background: #ffffff;
+}
+.input-wrap svg {
+  width: 18px;
+  height: 18px;
+}
+.input-wrap input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  padding: 6px 8px;
+}
+.input-wrap:focus-within {
+  border-color: #007BFF;
+}
+
+/* ===================== BOTÃO PRINCIPAL ===================== */
+.btn-primary, .submit {
+  margin-top: 8px;
+  background: var(--accent-green);
+  border-radius: 22px;
+  padding: 12px 18px;
+  text-align: center;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 18px #00000059;
+  transition: all 0.25s ease;
+}
+.btn-primary:hover, .submit:hover {
+  background: #00cc52;
+  transform: translateY(-2px);
+}
+
+/* ===================== DIVISOR OU ===================== */
+.or {
+  text-align: center;
+  font-size: 13px;
+  color: #ffffffff;
+  position: relative;
+}
+.or::before, .or::after {
+  content: "";
+  height: 1px;
+  background: #00000026;
+  position: absolute;
+  top: 50%;
+  width: 38%;
+}
+.or::before { left: 6%; }
+.or::after { right: 6%; }
+
+/* ===================== BOTÕES SOCIAIS ===================== */
+.socials, .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+.s-btn, .social-icons button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid #0000000f;
+  box-shadow: 0 4px 8px #00000026;
+  cursor: pointer;
+  font-size: 18px;
+}
+.google { background: #fff; color: #DB4437; }
+.facebook { background: #3b5998; color: #fff; }
+.apple { background: #000; color: #fff; }
+
+/* ===================== RODAPÉ ===================== */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+.footer a {
+  text-decoration: none;
+  font-weight: 600;
+}
+.footer a:first-child { color: #2e86de; }
+.footer a.forgot { color: #f4d03f; }
+
+/* ===================== RESPONSIVIDADE ===================== */
+@media (max-width: 820px) {
+  body.cadastro .card { width: 92vw; }
+  .form-container { flex-direction: column; }
+}
+@media (max-width: 520px) {
+  body.login .card { width: 92vw; }
+  .bg-wrap::before { inset: 12px; }
+}
+@media (max-width: 400px) {
+  .social-icons button { width: 36px; height: 36px; font-size: 16px; }
+}
+
+/* ===================== OUTROS ELEMENTOS DO CADASTRO ===================== */
+.right ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.right ul li {
+  font-size: 13px;
+  color: #f4d03f;
+  margin: 3px 0;
+}
+label { font-size: 13px; font-weight: 600; color: #fff; }
+input { outline: none; }
+.voltar {
+  font-size: 13px;
+  text-decoration: none;
+  color: #f4d03f;
+  margin-bottom: 8px;
+  transition: 0.3s;
+}
+.voltar:hover { opacity: 0.8; }
+
+/* ===================== CAMPOS DO CADASTRO ===================== */
+body.cadastro input {
+  padding: 10px; /* aumenta a altura dos campos só no cadastro */
+}
+body.cadastro .input-wrap input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;      /* mesmo tamanho do login */
+  padding: 10px 12px;   /* aumenta o campo */
+}
+body.cadastro .card {
+  width: 820px;
+  max-height: 90vh; /* não ultrapassa a tela */
+  overflow-y: auto; /* barra de rolagem se precisar */
+  padding: 28px;
+}

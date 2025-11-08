@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cadastro — TryEasy</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="cadastro">
+
+  <div class="bg-wrap"></div>
+  <div class="bg-overlay"></div>
+
+  <main class="card">
+    <header class="logo">
+      <img src="/assets/logo.png" alt="Logo" width="100" height="100">
+      <div class="brand">
+        <div class="try">TryEasy</div>
+        <div class="tech">Software Developer</div> 
+      </div>
+    </header>
+
+    <h1>Cadastro</h1>
+
+    <form id="cadastroForm">
+      <label>Nome:</label>
+      <input type="text" placeholder="Seu nome" required>
+
+      <label>E-mail:</label>
+      <input type="email" placeholder="exemplo@email.com" required>
+
+      <label>Telefone:</label>
+      <input type="tel" placeholder="(99) 99999-9999" required>
+
+      <label>Senha:</label>
+      <input type="password" placeholder="********" required>
+
+      <label>Confirmar Senha:</label>
+      <input type="password" placeholder="********" required>
+
+      <button type="submit" class="btn-primary">Cadastrar</button>
+    </form>
+
+    <div class="footer">
+      <a href="/index.html">Voltar para Login</a>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("cadastroForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const inputs = this.querySelectorAll("input");
+      const nome = inputs[0].value.trim();
+      const email = inputs[1].value.trim();
+      const telefone = inputs[2].value.trim();
+      const senha = inputs[3].value.trim();
+      const confirmar = inputs[4].value.trim();
+
+      if (!nome || !email || !telefone || !senha || !confirmar) {
+        alert("Preencha todos os campos!");
+        return;
+      }
+
+      if (senha !== confirmar) {
+        alert("As senhas não coincidem!");
+        return;
+      }
+
+      const usuario = { nome, email, telefone, senha };
+      localStorage.setItem(email, JSON.stringify(usuario));
+
+      alert("Cadastro realizado com sucesso! Faça login para continuar.");
+      window.location.href = "/index.html"; // redireciona para login
+    });
+  </script>
+</body>
+</html>

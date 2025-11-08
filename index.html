@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — TryEasy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login">
+  <div class="bg-wrap" aria-hidden="true">
+    <div class="bg-overlay"></div>
+  </div>
+
+  <main class="card" role="main" aria-labelledby="loginTitle">
+    <header class="logo" role="banner">
+      <img src="/assets/logo.png" alt="Logotipo da empresa" width="100" height="100">
+      <div class="brand" id="loginTitle">
+        <div class="try">TryEasy</div>
+        <div class="tech">Software Developer</div> 
+      </div>
+    </header>
+
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label class="small" for="email">E-mail:</label>
+        <div class="input-wrap" title="E-mail">
+          <input id="email" name="email" type="email" placeholder="exemplo@email.com" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="small" for="password">Senha:</label>
+        <div class="input-wrap" title="Senha">
+          <input id="password" name="password" type="password" placeholder="**********" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary">Entrar</button>
+
+      <div class="footer">
+        <a href="/cadastro.html">Cadastro</a>
+        <a href="#" class="forgot">Esqueceu a senha?</a>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('password').value.trim();
+
+      if (!email || !senha) {
+        alert('Preencha e-mail e senha.');
+        return;
+      }
+
+      const dadosUsuario = localStorage.getItem(email);
+      if (!dadosUsuario) {
+        alert("Usuário não encontrado! Faça o cadastro antes de entrar.");
+        return;
+      }
+
+      const user = JSON.parse(dadosUsuario);
+      if (user.senha === senha) {
+        localStorage.setItem("usuarioLogado", email);
+        window.location.href = "/menu principal/index.html"; // redireciona para dashboard
+      } else {
+        alert("E-mail ou senha incorretos!");
+      }
+    });
+  </script>
+</body>
+</html>

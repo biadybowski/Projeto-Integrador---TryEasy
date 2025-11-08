@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil — TryEasy</title>
+  <link rel="stylesheet" href="/menu principal/style.css" />
+</head>
+<body>
+
+  <!-- Fundo com overlay e blur -->
+  <div class="bg-wrap"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- TOPO DA PÁGINA -->
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">
+          <img src="/assets/logo.png" alt="Logo" />
+        </div>
+        TryEasy
+      </div>
+      <nav class="navbar">
+        <a href="/menu principal/index.html">Início</a>
+        <a href="/menu principal/perfil.html">Perfil</a>
+        <a href="https://economia.uol.com.br/noticias/redacao/2024/02/02/metodo-50-30-20-aprenda-a-tecnica-para-passar-de-devedor-a-investidor.htm" target="_blank">Dicas Financeiras</a>
+        <a href="/index.html" onclick="logout()">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTAINER PRINCIPAL -->
+  <main class="container">
+
+    <!-- Card do Perfil -->
+    <section class="profile-card">
+      <h2>Perfil do Usuário</h2>
+      <div class="profile-info">
+        <p>
+          <strong>Nome:</strong> <span id="nomePerfil">--</span>
+          <button class="update-field" data-field="nome">Atualizar</button>
+        </p>
+        <p>
+          <strong>E-mail:</strong> <span id="emailPerfil">--</span>
+          <button class="update-field" data-field="email">Atualizar</button>
+        </p>
+        <p>
+          <strong>Telefone:</strong> <span id="telefonePerfil">--</span>
+          <button class="update-field" data-field="telefone">Atualizar</button>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>TryEasy — Software Developer © 2025 Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    // ================== CARREGAR USUÁRIO LOGADO ==================
+    window.addEventListener("DOMContentLoaded", () => {
+      const emailLogado = localStorage.getItem("usuarioLogado");
+      if (!emailLogado) {
+        alert("Nenhum usuário logado!");
+        window.location.href = "/index.html";
+        return;
+      }
+
+      const usuario = JSON.parse(localStorage.getItem(emailLogado));
+      document.getElementById("nomePerfil").textContent = usuario.nome;
+      document.getElementById("emailPerfil").textContent = usuario.email;
+      document.getElementById("telefonePerfil").textContent = usuario.telefone;
+    });
+
+    // ================== ATUALIZAR DADOS ==================
+    document.getElementById("updateBtn").addEventListener("click", () => {
+      const emailLogado = localStorage.getItem("usuarioLogado");
+      if (!emailLogado) return;
+
+      const usuario = JSON.parse(localStorage.getItem(emailLogado));
+
+      const novoNome = prompt("Digite seu novo nome:", usuario.nome);
+      const novoEmail = prompt("Digite seu novo e-mail:", usuario.email);
+      const novoTelefone = prompt("Digite seu novo telefone:", usuario.telefone);
+
+      if (!novoNome || !novoEmail || !novoTelefone) {
+        alert("Todos os campos são obrigatórios!");
+        return;
+      }
+
+      // Remove a chave antiga se o e-mail mudou
+      if (novoEmail !== usuario.email) {
+        localStorage.removeItem(usuario.email);
+        localStorage.setItem("usuarioLogado", novoEmail); // atualiza e-mail logado
+      }
+
+      usuario.nome = novoNome;
+      usuario.email = novoEmail;
+      usuario.telefone = novoTelefone;
+
+      localStorage.setItem(novoEmail, JSON.stringify(usuario));
+
+      document.getElementById("nomePerfil").textContent = novoNome;
+      document.getElementById("emailPerfil").textContent = novoEmail;
+      document.getElementById("telefonePerfil").textContent = novoTelefone;
+
+      alert("Perfil atualizado com sucesso!");
+    });
+
+    // ================== LOGOUT ==================
+    function logout() {
+      localStorage.removeItem("usuarioLogado");
+    }
+  </script>
+  <!-- script.js externo -->
+  <script src="/menu principal/script.js"></script>
+
+</body>
+</html>
